@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiformset Demo</title>
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.formset.js"></script>
+        {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "./css/bootstrap.min.css" %}"  rel="stylesheet">
+    <link href="{% static "./css/bootstrap.css" %}"  rel="stylesheet">
+    <link href="{% static "./css/dashboard.css" %}" rel="stylesheet">
+
+    <link href="{{ STATIC_URL }}css/docs.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/prettify.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/tm_docs.css" rel="stylesheet">
+    <link href="{% static "./css/signin.css" %}" rel="stylesheet">
+    <script type="text/javascript">
+        $(function() {
+            $(".inline.{{ ingredient_form.prefix }}").formset({
+                prefix: "{{ ingredient_form.prefix }}",
+                animateForms: true,
+                fadeIn:true
+            })
+
+            $(".inline.{{ instruction_form.prefix }}").formset({
+                prefix: "{{ instruction_form.prefix }}",
+                animateForms: true,
+                fadeIn:true
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div>
+    <style>
+input[type="text"]
+ {
+  display: list-item;
+  height: 46px;
+  padding: 10px 16px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.33;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+
+textarea{
+  display: list-item;
+  width: 650px;
+  height: 250px;
+  line-height: 25px;
+  margin-top: 20px;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+textarea:focus{
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+
+}
+input:focus{
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+
+}
+
+input[type="number"]
+ {
+  display: list-item;
+  height: 46px;
+  padding: 10px 16px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.33;
+  color: #555555;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+
+label{
+    color: #373737;
+    margin-bottom: 10px;
+}
+
+.errorlist{
+    color: #FF0000;
+    list-style-type: none;
+    position: relative;
+    top: -5px;
+    left: -40px;
+}
+    </style>
+        <h1>view Recipe</h1>
+        <ul>
+{% for article in recipe_list %}
+    <li>{{ article.title }} </li>
+    <li>{{ article.description }}</li>
+        <li>{{ article.number }} </li>
+{% empty %}
+    <li><h1>No Articles yet.</h1></li>
+{% endfor %}
+  {% for article in instruction %}
+    <li>{{ article.title }} </li>
+    <li>{{ article.description }}</li>
+        <li>{{ article.number }} </li>
+{% empty %}
+    <li><h1>No Articles yet.</h1></li>
+{% endfor %}
+</ul>
+    </div>
+</body>
+<script src="{% static "./js/docs.min.js" %}" ></script>
+</html>

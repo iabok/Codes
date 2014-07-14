@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiformset Demo</title>
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.formset.js"></script>
+        {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "./css/bootstrap.min.css" %}"  rel="stylesheet">
+    <link href="{% static "./css/bootstrap.css" %}"  rel="stylesheet">
+    <link href="{% static "./css/dashboard.css" %}" rel="stylesheet">
+
+    <link href="{{ STATIC_URL }}css/docs.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/prettify.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/tm_docs.css" rel="stylesheet">
+    <link href="{% static "./css/signin.css" %}" rel="stylesheet">
+    <script type="text/javascript">
+        $(function() {
+
+            $(".inline.{{ use_form.prefix }}").formset({
+                prefix: "{{ use_form.prefix }}",
+                animateForms: true,
+                fadeIn:true
+
+            });
+
+
+            $(".inline.{{ placement_form.prefix }}").formset({
+                prefix: "{{ placement_form.prefix }}",
+                animateForms: true,
+                fadeIn:true
+
+            });
+
+            $(".inline.{{ size_form.prefix }}").formset({
+                prefix: "{{ size_form.prefix }}",
+                animateForms: true,
+                fadeIn:true
+
+            });
+
+            $(".inline.{{ territory_form.prefix }}").formset({
+                prefix: "{{ territory_form.prefix }}",
+                animateForms: true,
+                fadeIn:true
+
+            });
+
+            $(".inline.{{ duration_form.prefix }}").formset({
+                prefix: "{{ duration_form.prefix }}",
+                animateForms: true,
+                fadeIn:true
+
+            });
+
+            $(".inline.{{ print_run_form.prefix }}").formset({
+                prefix: "{{ duration_form.prefix }}",
+                animateForms: true,
+                fadeIn:true
+
+            });
+        });
+
+
+      function showpricemenu(choices){
+
+               $('.inline').each(function() {
+
+                    if ($(this).attr("id") == choices) {
+                               $('.show').find('.btn-primary').show();
+                               $(this).show(200);
+
+                          }
+                    else {
+                               $('.show').find('.btn-primary').hide();
+                               $(this).hide(600);
+                          }
+                     });
+
+
+ }
+
+
+
+    </script>
+</head>
+
+<body>
+    <div>
+    <style>
+input[type="text"]
+ {
+  display: inline-block;
+  width: 20%;
+  height: 30px;
+  padding: 10px 16px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.33;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+
+textarea{
+  display: list-item;
+  width: 25%;
+  height: 150px;
+  line-height: 25px;
+  margin-top: 20px;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+textarea:focus{
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+
+}
+input:focus{
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+
+}
+
+input[type="number"]
+ {
+  display: list-item;
+  height: 46px;
+  padding: 10px 16px;
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.33;
+  color: #555555;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+
+label{
+    color: #373737;
+    margin-bottom: 10px;
+    font-weight: normal;
+
+}
+
+#id_slug{
+    display: none;
+}
+
+.errorlist{
+    color: #FF0000;
+    list-style-type: none;
+    position: relative;
+    top: -5px;
+    left: -40px;
+}
+select
+ {
+  display: inline-block;
+  width: 20%;
+  height: 40px;
+  padding: 4px 6px;
+  margin-bottom: 9px;
+  font-size: 164;
+  line-height: 40px;
+  color: #555555;
+  border: 1px solid #cccccc;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+}
+
+.helptext{
+    color: #5ab35f;
+    display: list-item;
+    list-style-type: none;
+    font-size: 12px;
+}
+.inline{
+    margin-top: 20px;
+}
+
+.btn-primary{
+    margin-top: 20px;
+    display: none;
+}
+.submit{
+    width: 10%;
+    font-size: 16px;
+}
+#price-show{
+    cursor: pointer;
+}
+ .inline{
+    display: none;
+}
+    </style>
+   <div class="col-md-8">
+    <div class="container">
+        <h1>Usage Modules</h1>
+        <form action="." method="post">
+            {% csrf_token %}
+            <div>
+                {{ form.as_p }}
+            </div>
+        <br>
+        <h1>Choose Where Applicable</h1>
+
+           <fieldset>
+           <div class="price-show">
+                <legend >Use</legend><span class="show">
+           <a id="choice" href="javascript:showpricemenu('choice');" >show this one only</a>
+                {{ use_form.management_form }}
+                {{ use_form.non_form_errors }}
+                {% for form in use_form %}
+                    {{ form.id }}
+                    <div class="inline {{ use_form.prefix }}" id="choice">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+
+                {% endfor %}
+           </span>
+           </div>
+            </fieldset>
+            <br>
+
+            <fieldset>
+            <div class="price-show">
+                <legend>Placement</legend><span class="show">
+            <a id="choice2" href="javascript:showpricemenu('choice2');" >show this one only</a>
+                {{ placement_form.management_form }}
+                {{ placement_form.non_form_errors }}
+                {% for form in placement_form %}
+                    {{ form.id }}
+                    <div class="inline {{ placement_form.prefix }}" id="choice2">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                {% endfor %}
+            </span>
+            </div>
+            </fieldset><br>
+
+            <fieldset>
+                <legend>Size</legend>
+                {{ size_form.management_form }}
+                {{ size_form.non_form_errors }}
+                {% for form in size_form %}
+                    {{ form.id }}
+                    <div class="inline {{ size_form.prefix }}">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+        <br>
+
+            <fieldset>
+                <legend>Territory</legend>
+                {{ territory_form.management_form }}
+                {{ territory_form.non_form_errors }}
+                {% for form in territory_form %}
+                    {{ form.id }}
+                    <div class="inline {{ territory_form.prefix }}">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+        <br>
+            <fieldset>
+                <legend>Duration</legend>
+                {{ duration_form.management_form }}
+                {{ duration_form.non_form_errors }}
+                {% for form in duration_form %}
+                    {{ form.id }}
+                    <div class="inline {{ duration_form.prefix }}">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+        <br>
+
+            <fieldset>
+                <legend>Print Run</legend>
+                {{ print_run_form.management_form }}
+                {{ print_run_form.non_form_errors }}
+                {% for form in print_run_form %}
+                    {{ form.id }}
+                    <div class="inline {{ print_run_form.prefix }}">
+                        {{ form.name.errors }}
+                        {{ form.name.label_tag }}
+                        {{ form.name }}
+                    </div>
+                {% endfor %}
+            </fieldset>
+        <br>
+
+            <input type="submit"  value="Submit" class="submit btn btn-success" />
+        </form>
+    </div>
+   </div>
+ </div>
+</body>
+<script src="{% static "./js/docs.min.js" %}" ></script>
+</html>
