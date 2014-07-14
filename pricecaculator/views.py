@@ -55,7 +55,7 @@ class PriceCreateView(CreateView):
 
         if (form.is_valid() and use_form.is_valid() and placement_form.is_valid() and
             size_form.is_valid() and territory_form.is_valid() and duration_form.is_valid()
-                and print_run_form.is_valid):
+                and print_run_form.is_valid()):
             return self._form_valid(form,
                                     use_form,
                                     placement_form,

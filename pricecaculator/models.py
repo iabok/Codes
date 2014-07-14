@@ -64,7 +64,7 @@ DURATION_CATEGORIES = (
 
 
 class Usage(models.Model):
-    name = models.CharField(max_length=50, blank=False, help_text='*State the name of the Usage Plan Such as Newspaper, \
+    name = models.CharField(max_length=50, blank=False, help_text='*State the name of the Usage Plan Such as Newspaper,\
                                                                 Magazines, Online usage etc.')
     slug = models.SlugField(max_length=50, blank=True, unique=True, help_text='*Unique value for the usage page URL\
                                                                 created from name.')
@@ -160,23 +160,6 @@ class Territory(models.Model):
         super(Territory, self).delete(*args, **kwargs)
 
 
-class PrintRun(models.Model):
-    usage = models.ForeignKey(Usage, null=True, blank=True)
-    name = models.CharField(max_length=20, choices=PRINT_RUN_CATEGORIES)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __unicode__(self):
-        return self.name
-
-    def save(self, *args, **kwargs):
-        super(PrintRun, self).save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        """delete -- Remove to leave usage."""
-        super(PrintRun, self).delete(*args, **kwargs)
-
-
 class Duration(models.Model):
     usage = models.ForeignKey(Usage, null=True, blank=True)
     name = models.CharField(max_length=20, choices=DURATION_CATEGORIES)
@@ -192,3 +175,20 @@ class Duration(models.Model):
     def delete(self, *args, **kwargs):
         """delete -- Remove to leave usage."""
         super(Duration, self).delete(*args, **kwargs)
+
+
+class PrintRun(models.Model):
+    usage = models.ForeignKey(Usage, null=True, blank=True)
+    name = models.CharField(max_length=20, choices=PRINT_RUN_CATEGORIES)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __unicode__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        super(PrintRun, self).save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        """delete -- Remove to leave usage."""
+        super(PrintRun, self).delete(*args, **kwargs)
